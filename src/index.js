@@ -8,7 +8,7 @@ function onInput() {
     name = inputEl.value
     console.log(name); 
     console.log(rezultCountrie);
-    
+    fetchCountries()
     }
 
 
