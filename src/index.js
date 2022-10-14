@@ -16,37 +16,39 @@ inputEl.addEventListener("input", debounce(onInput,DEBOUNCE_DELAY))
 function onInput(e) {
     name = e.target.value.trim();
     
-        fetchCountries(name)
+    if(name === ""){
+        clearMarkup()
+        return
+    }
+        
+    fetchCountries(name)
     .then(data => { 
-        console.log("data", data);
-        console.log('data.length', data.length);
-        console.log('name', name); 
-        if(name !== " "){
+        // console.log("data", data);
+        // console.log('data.length', data.length);
+        // console.log('name', name); 
+ 
             if(data.length >= 10){
                 clearMarkup()
                 Notify.info('Too many matches found. Please enter a more specific name.');
+                return
             }
        
             if(data.length > 1 & data.length < 10 ){
                 clearMarkupInfo()
                 const marcup = createMarkup(data)
                 countryListEl.innerHTML = marcup;
+                return
             }
             
             if(data.length === 1){ 
                 countryListEl.innerHTML = '';
                 const marcupInfo = createMarkupInfo(data);
-                countryInfoEl.innerHTML = marcupInfo}     
-        }
-
-        else{
-            clearMarkup()
-}
-
+                countryInfoEl.innerHTML = marcupInfo
+                return
+           }     
+     
     })
-
     .catch(err => clearMarkup())
-
     }
 
 function  createMarkup(arr) {
@@ -81,3 +83,4 @@ function clearMarkup() {
 function clearMarkupInfo() {
     countryInfoEl.innerHTML = '';
 }
+

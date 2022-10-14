@@ -4,7 +4,7 @@ export function fetchCountries(name) {
 return arrCountries.then( response=> {
 if(!response.ok){
     Notify.failure('Oops, there is no country with that name')
-    throw new Error()
+    throw new Error(response.status)
 }
 console.log(response);
 return response.json();
