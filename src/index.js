@@ -14,7 +14,7 @@ const inputEl = document.querySelector('input')
 inputEl.addEventListener("input", debounce(onInput,DEBOUNCE_DELAY))
 
 function onInput(e) {
-    name = inputEl.value.trim();
+    name = e.target.value.trim();
     
         fetchCountries(name)
     .then(data => { 
@@ -36,7 +36,7 @@ function onInput(e) {
             if(data.length === 1){ 
                 countryListEl.innerHTML = '';
                 const marcupInfo = createMarkupInfo(data);
-                countryInfoEl.innerHTML = marcupInfo}
+                countryInfoEl.innerHTML = marcupInfo}     
         }
 
         else{
