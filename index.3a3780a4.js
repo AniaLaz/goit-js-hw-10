@@ -1,2 +1,0 @@
-!function(){var n=function n(o){fetch("https://restcountries.com/v3.1/name/".concat(o)).then((function(o){if(!o.ok)throw new Error;return console.log(o),n(),o.json()})).then((function(n){return console.log(n)})).catch((function(n){return console.log(n)}))},o="",t=document.querySelector("input");t.addEventListener("input",(function(){o=t.value,console.log(o),console.log(n),fetchCountries()}))}();
-//# sourceMappingURL=index.3a3780a4.js.map
