@@ -45,10 +45,7 @@ function onInput(e) {
 
     })
 
-    .catch(err => {
-        clearMarkup();
-        Notify.failure('Oops, there is no country with that name')
-})
+    .catch(err => clearMarkup())
 
     }
 
