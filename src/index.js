@@ -23,11 +23,12 @@ function onInput(e) {
         console.log('name', name); 
         if(name !== " "){
             if(data.length >= 10){
+                clearMarkup()
                 Notify.info('Too many matches found. Please enter a more specific name.');
             }
        
             if(data.length > 1 & data.length < 10 ){
-    
+                clearMarkupInfo()
                 const marcup = createMarkup(data)
                 countryListEl.innerHTML = marcup;
             }
@@ -77,5 +78,9 @@ function createMarkupInfo(arr) {
 
 function clearMarkup() {
     countryListEl.innerHTML = '';
+    countryInfoEl.innerHTML = '';
+}
+
+function clearMarkupInfo() {
     countryInfoEl.innerHTML = '';
 }
