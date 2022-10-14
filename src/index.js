@@ -64,12 +64,12 @@ function createMarkupInfo(arr) {
      return arr.map(country =>{ 
         const language = Object.values(country.languages)
     return `<li>
-    <img src="${country.flags.svg}" alt="flags" class="flag" width = 20 >
-    <h2>${country.name.common}</h2>
+    <img src="${country.flags.svg}" alt="flags" class="flag" width = 30 >
+    <h2 class ="title-info">${country.name.common}</h2>
     <ul>
-    <li>capital: ${country.capital}</li>
-    <li>population: ${country.population}</li>
-    <li>languages: ${language}</li>
+    <li><span class ="info">capital:</span> ${country.capital}</li>
+    <li><span class ="info">population:</span> ${country.population}</li>
+    <li><span class ="info">languages:</span> ${language}</li>
     </ul>
     </li>
     `}).join('')

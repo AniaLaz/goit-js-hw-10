@@ -31,3 +31,14 @@ li {
 .flag {
   margin-right: 10px;
 }
+
+.info{
+  color: rgb(25, 54, 187);
+  padding-right: 10px;
+  font-size: 15px;
+  font-weight: bold;
+}
+
+.title-info {
+  font-size: 35px;
+}
