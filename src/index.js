@@ -1,7 +1,8 @@
 import './css/styles.css';
 import { fetchCountries } from "./fetchCountries";
 import debounce from "lodash.debounce"
-console.log(debounce);
+import { Notify } from 'notiflix/build/notiflix-notify-aio';
+
 
 const countryListEl = document.querySelector('.country-list');
 const countryInfoEl = document.querySelector('.country-info');
@@ -20,14 +21,24 @@ function onInput(e) {
         console.log("data", data);
         console.log('data.length', data.length);
 
+        if(data.length >= 10){
+            Notify.info('Too many matches found. Please enter a more specific name.');
+        }
+   
+        if(data.length > 1 & data.length < 10 ){
 
-        const marcup = createMarkup(data)
-        countryListEl.innerHTML = marcup;
-        const marcupInfo = createMarkupInfo(data)
-        countryInfoEl.innerHTML = marcupInfo
+            const marcup = createMarkup(data)
+            countryListEl.innerHTML = marcup;
+        }
+        
+        if(data.length === 1){ 
+            countryListEl.innerHTML = " "
+            const marcupInfo = createMarkupInfo(data)
+            countryInfoEl.innerHTML = marcupInfo}
     })
-    .catch(err => console.log(err))
-    console.log("hello");
+
+    .catch(err => Notify.failure('Oops, there is no country with that name'))
+
     }
 
 function  createMarkup(arr) {
