@@ -1,25 +1,36 @@
 import './css/styles.css';
-import { rezultCountrie } from "./fetchCountries";
+import { fetchCountries } from "./fetchCountries";
+
+const countryListEl = document.querySelector('.country-list');
+const countryInfoEl = document.querySelector('.country-info');
+
 let name = "";
 const DEBOUNCE_DELAY = 300;
 const inputEl = document.querySelector('input')
+
 inputEl.addEventListener("input", onInput)
-function onInput() {
+
+function onInput(e) {
     name = inputEl.value
-    console.log(name); 
-    console.log(rezultCountrie);
-    fetchCountries()
+    console.log('name', name); 
+    fetchCountries(name)
+    .then(data => {
+        console.log("data", data)
+        const marcup = createMarkup(data)
+        console.log("marcup", marcup); 
+        countryListEl.innerHTML = marcup
+    })
+    .catch(err => console.log(err))
+    console.log("hello");
     }
 
+function  createMarkup(arr) {
+    return arr.map(country => `<li>
+    <img src="${country.flags.svg}" alt="flags" class="flag" width = 20 >
+    <h2>${country.name.common}</h2>
+    </li>`).join('')
+}
 
-// function fetchCountries() {
-//     const arrCountries = fetch(`https://restcountries.com/v3.1/name/${name}`)
-// arrCountries.then( response=> {
-// if(!response.ok){
-//     throw new Error()
+// function insertAdjacen(e) {
+//     countryListEl.insertAdjacentHTML('beforeend', createMarkup(arr)) 
 // }
-// console.log(response);
-// return response.json();
-// }).then(data => console.log(data)).catch(err => console.log(err))
-// }
-
