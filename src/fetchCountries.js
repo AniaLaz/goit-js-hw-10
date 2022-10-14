@@ -1,3 +1,4 @@
+import { Notify } from 'notiflix/build/notiflix-notify-aio';
 export function fetchCountries(name) {
     const arrCountries = fetch(`https://restcountries.com/v3.1/name/${name}`)
 return arrCountries.then( response=> {
