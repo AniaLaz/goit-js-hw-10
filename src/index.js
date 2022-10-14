@@ -14,30 +14,40 @@ const inputEl = document.querySelector('input')
 inputEl.addEventListener("input", debounce(onInput,DEBOUNCE_DELAY))
 
 function onInput(e) {
-    name = inputEl.value
-    console.log('name', name); 
-    fetchCountries(name)
-    .then(data => {
+    name = inputEl.value.trim();
+    
+        fetchCountries(name)
+    .then(data => { 
         console.log("data", data);
         console.log('data.length', data.length);
-
-        if(data.length >= 10){
-            Notify.info('Too many matches found. Please enter a more specific name.');
+        console.log('name', name); 
+        if(name !== " "){
+            if(data.length >= 10){
+                Notify.info('Too many matches found. Please enter a more specific name.');
+            }
+       
+            if(data.length > 1 & data.length < 10 ){
+    
+                const marcup = createMarkup(data)
+                countryListEl.innerHTML = marcup;
+            }
+            
+            if(data.length === 1){ 
+                countryListEl.innerHTML = '';
+                const marcupInfo = createMarkupInfo(data);
+                countryInfoEl.innerHTML = marcupInfo}
         }
-   
-        if(data.length > 1 & data.length < 10 ){
 
-            const marcup = createMarkup(data)
-            countryListEl.innerHTML = marcup;
-        }
-        
-        if(data.length === 1){ 
-            countryListEl.innerHTML = " "
-            const marcupInfo = createMarkupInfo(data)
-            countryInfoEl.innerHTML = marcupInfo}
+        else{
+            clearMarkup()
+}
+
     })
 
-    .catch(err => Notify.failure('Oops, there is no country with that name'))
+    .catch(err => {
+        clearMarkup();
+        Notify.failure('Oops, there is no country with that name')
+})
 
     }
 
@@ -62,4 +72,10 @@ function createMarkupInfo(arr) {
     </ul>
     </li>
     `}).join('')
+}
+
+
+function clearMarkup() {
+    countryListEl.innerHTML = '';
+    countryInfoEl.innerHTML = '';
 }
